@@ -3,9 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SpamGuard AI — Intelligent Email Spam & Phishing Detector</title>
-  <meta name="description" content="AI email classifier distinguishing spam and legitimate messages." />
-  
+  <title>SpamGuard AI — Email Spam & Phishing Detection System</title>
+  <meta name="description" content="Production-grade AI email spam and phishing classifier powered by Scikit-Learn Logistic Regression and FastAPI." />
+  <meta name="theme-color" content="#0a0d14" />
+
+  <!-- Open Graph / SEO -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="SpamGuard AI — Email Spam & Phishing Detector" />
+  <meta property="og:description" content="Classify emails in real-time with machine learning." />
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,26 +28,19 @@
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
             mono: ['"JetBrains Mono"', 'monospace'],
           },
-          colors: {
-            brand: {
-              cyan: '#06b6d4',
-              blue: '#3b82f6',
-              purple: '#8b5cf6',
-            }
-          },
           animation: {
-            'float-slow': 'float 12s ease-in-out infinite alternate',
-            'float-reverse': 'float-reverse 15s ease-in-out infinite alternate',
+            'float-slow': 'float 14s ease-in-out infinite alternate',
+            'float-reverse': 'float-reverse 16s ease-in-out infinite alternate',
             'pulse-glow': 'pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
           },
           keyframes: {
             float: {
               '0%': { transform: 'translate(0px, 0px) scale(1)' },
-              '100%': { transform: 'translate(30px, 40px) scale(1.08)' },
+              '100%': { transform: 'translate(25px, 35px) scale(1.08)' },
             },
             'float-reverse': {
               '0%': { transform: 'translate(0px, 0px) scale(1)' },
-              '100%': { transform: 'translate(-30px, -40px) scale(1.06)' },
+              '100%': { transform: 'translate(-25px, -35px) scale(1.06)' },
             },
             'pulse-glow': {
               '0%, 100%': { opacity: '1', transform: 'scale(1)' },
@@ -55,17 +54,17 @@
 </head>
 <body class="bg-[#0a0d14] text-slate-100 font-sans min-h-screen relative overflow-x-hidden selection:bg-cyan-500 selection:text-white flex flex-col items-center px-4 py-8 md:py-12">
 
-  <!-- Ambient background glow elements -->
-  <div class="fixed -top-28 -left-28 w-[480px] h-[480px] rounded-full bg-blue-600/30 blur-[130px] pointer-events-none animate-float-slow -z-10"></div>
-  <div class="fixed -bottom-28 -right-28 w-[460px] h-[460px] rounded-full bg-cyan-500/25 blur-[130px] pointer-events-none animate-float-reverse -z-10"></div>
-  <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-purple-600/15 blur-[140px] pointer-events-none -z-10"></div>
+  <!-- Ambient glowing background orbs -->
+  <div class="fixed -top-32 -left-32 w-[520px] h-[520px] rounded-full bg-blue-600/25 blur-[140px] pointer-events-none animate-float-slow -z-10"></div>
+  <div class="fixed -bottom-32 -right-32 w-[480px] h-[480px] rounded-full bg-cyan-500/20 blur-[140px] pointer-events-none animate-float-reverse -z-10"></div>
+  <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] rounded-full bg-indigo-600/15 blur-[150px] pointer-events-none -z-10"></div>
 
   <div class="w-full max-w-3xl flex flex-col gap-6 z-10">
 
-    <!-- Header Section -->
+    <!-- Top Navigation / Status Header -->
     <header class="text-center flex flex-col items-center gap-3">
       <!-- Status Badge -->
-      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 text-xs font-semibold uppercase tracking-wider shadow-[0_0_15px_rgba(6,182,212,0.15)]">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 text-xs font-semibold uppercase tracking-wider shadow-[0_0_15px_rgba(6,182,212,0.15)]">
         <span id="apiDot" class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] animate-pulse-glow"></span>
         <span id="apiStatusText">AI Model Ready</span>
       </div>
@@ -75,27 +74,27 @@
       </h1>
 
       <p class="text-slate-400 text-sm md:text-base max-w-lg leading-relaxed">
-        Real-time email intelligence using our trained NLP vectorizer and Multinomial Naive Bayes classification model.
+        Production-grade NLP classifier powered by Logistic Regression to detect spam and phishing threats in real-time.
       </p>
     </header>
 
-    <!-- Main Card -->
+    <!-- Main Scanner Container -->
     <main class="backdrop-blur-xl bg-slate-900/70 border border-white/10 rounded-2xl p-5 md:p-7 shadow-2xl shadow-black/60 transition-all hover:border-white/15">
       
       <!-- Preset Sample Pills -->
       <div class="flex flex-wrap items-center gap-2 mb-5">
-        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider mr-1">Try sample:</span>
-        <button type="button" onclick="loadSample('spam')" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-red-950/30 border border-red-500/25 text-red-300 hover:bg-red-900/40 hover:border-red-400 hover:text-red-200 transition-all transform hover:-translate-y-0.5">
-          🚨 Phishing Scam
+        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider mr-1">Quick Samples:</span>
+        <button type="button" onclick="loadSample('phishing')" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-red-950/30 border border-red-500/25 text-red-300 hover:bg-red-900/40 hover:border-red-400 hover:text-red-200 transition-all transform hover:-translate-y-0.5">
+          🚨 Bank Phishing
         </button>
-        <button type="button" onclick="loadSample('lottery')" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-red-950/30 border border-red-500/25 text-red-300 hover:bg-red-900/40 hover:border-red-400 hover:text-red-200 transition-all transform hover:-translate-y-0.5">
-          🎁 Cash Prize / Crypto
+        <button type="button" onclick="loadSample('crypto')" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-red-950/30 border border-red-500/25 text-red-300 hover:bg-red-900/40 hover:border-red-400 hover:text-red-200 transition-all transform hover:-translate-y-0.5">
+          🎁 Crypto / Lottery
         </button>
-        <button type="button" onclick="loadSample('ham')" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-emerald-950/30 border border-emerald-500/25 text-emerald-300 hover:bg-emerald-900/40 hover:border-emerald-400 hover:text-emerald-200 transition-all transform hover:-translate-y-0.5">
-          💼 Work Meeting
+        <button type="button" onclick="loadSample('work')" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-emerald-950/30 border border-emerald-500/25 text-emerald-300 hover:bg-emerald-900/40 hover:border-emerald-400 hover:text-emerald-200 transition-all transform hover:-translate-y-0.5">
+          💼 Team Standup
         </button>
-        <button type="button" onclick="loadSample('personal')" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-emerald-950/30 border border-emerald-500/25 text-emerald-300 hover:bg-emerald-900/40 hover:border-emerald-400 hover:text-emerald-200 transition-all transform hover:-translate-y-0.5">
-          ☕ Personal Note
+        <button type="button" onclick="loadSample('casual')" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-emerald-950/30 border border-emerald-500/25 text-emerald-300 hover:bg-emerald-900/40 hover:border-emerald-400 hover:text-emerald-200 transition-all transform hover:-translate-y-0.5">
+          ☕ Casual Chat
         </button>
       </div>
 
@@ -107,7 +106,7 @@
               <rect width="20" height="16" x="2" y="4" rx="2"/>
               <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
             </svg>
-            Raw Email Content
+            Email Content
           </label>
           <div class="flex items-center gap-2">
             <button type="button" onclick="pasteClipboard()" class="text-xs text-slate-400 hover:text-slate-200 px-2 py-1 rounded bg-white/5 hover:bg-white/10 transition-colors flex items-center gap-1">
@@ -121,13 +120,13 @@
 
         <textarea
           id="emailInput"
-          placeholder="Paste or type an email subject and body here to scan..."
+          placeholder="Paste or type an email subject and body here to classify..."
           spellcheck="false"
           class="w-full h-48 bg-slate-950/80 border border-white/10 rounded-xl p-4 text-slate-100 placeholder-slate-500 text-sm md:text-base leading-relaxed resize-y focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20 transition-all font-sans"
         ></textarea>
 
         <div class="flex items-center justify-between text-xs text-slate-400 mt-1">
-          <span>Tip: Press <kbd class="px-1.5 py-0.5 rounded bg-white/10 text-slate-300 font-mono">Ctrl</kbd> + <kbd class="px-1.5 py-0.5 rounded bg-white/10 text-slate-300 font-mono">Enter</kbd> to scan</span>
+          <span>Tip: Press <kbd class="px-1.5 py-0.5 rounded bg-white/10 text-slate-300 font-mono">Ctrl</kbd> + <kbd class="px-1.5 py-0.5 rounded bg-white/10 text-slate-300 font-mono">Enter</kbd> to classify</span>
           <div class="flex items-center gap-3 font-mono text-slate-400">
             <span id="charCount">0 chars</span>
             <span>&bull;</span>
@@ -139,7 +138,7 @@
       <!-- Action Footer -->
       <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6 pt-5 border-t border-white/10">
         <div class="flex items-center gap-2 text-xs text-slate-400">
-          <span>Target API:</span>
+          <span>Endpoint:</span>
           <span class="font-mono bg-black/40 text-cyan-400 px-2 py-1 rounded border border-white/5">POST /predict</span>
         </div>
 
@@ -147,24 +146,33 @@
           type="button"
           id="scanBtn"
           onclick="analyzeEmail()"
-          class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-sm md:text-base shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+          class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-sm md:text-base shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
         >
           <div id="btnSpinner" class="hidden w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-          <span id="btnText">Scan Email</span>
+          <span id="btnText">Classify Email</span>
           <svg id="btnIcon" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="m9 18 6-6-6-6"/>
           </svg>
         </button>
       </div>
 
+      <!-- Server Cold-Start Notice (helpful for Render/Railway free tiers) -->
+      <div id="coldStartNotice" class="hidden mt-4 p-3 rounded-xl bg-cyan-950/40 border border-cyan-500/30 text-cyan-300 text-xs flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+        <span>Waking up cloud server instance... Free tiers can take up to 30s to initialize.</span>
+      </div>
+
       <!-- Error Toast Alert -->
-      <div id="errorToast" class="hidden mt-4 p-3.5 rounded-xl bg-red-950/60 border border-red-500/40 text-red-200 text-sm flex items-center gap-2.5">
-        <svg class="w-5 h-5 text-red-400 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <div id="errorToast" class="hidden mt-4 p-3.5 rounded-xl bg-red-950/60 border border-red-500/40 text-red-200 text-sm flex items-start gap-2.5">
+        <svg class="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="10"/>
           <line x1="12" x2="12" y1="8" y2="12"/>
           <line x1="12" x2="12.01" y1="16" y2="16"/>
         </svg>
-        <span id="errorMessage">Connection error.</span>
+        <div class="flex-1">
+          <span id="errorMessage">Connection error.</span>
+          <div class="text-xs text-red-300/80 mt-1">If using external hosting, configure your backend URL via the ⚙️ icon at the top.</div>
+        </div>
       </div>
 
     </main>
@@ -181,8 +189,13 @@
             <p id="verdictDesc" class="text-xs md:text-sm text-slate-400 mt-0.5">Classification description</p>
           </div>
         </div>
-        <div id="threatPill" class="self-start sm:self-auto px-4 py-1.5 rounded-full text-xs font-extrabold tracking-wider uppercase border">
-          STATUS
+        <div class="flex items-center gap-2">
+          <button type="button" onclick="copyResult()" title="Copy result" class="px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-300 flex items-center gap-1 transition-colors">
+            <span id="copyBtnText">📋 Copy</span>
+          </button>
+          <div id="threatPill" class="px-4 py-1.5 rounded-full text-xs font-extrabold tracking-wider uppercase border">
+            STATUS
+          </div>
         </div>
       </div>
 
@@ -193,7 +206,7 @@
           <span id="metricClass" class="text-lg md:text-xl font-bold font-mono text-white">—</span>
         </div>
         <div class="bg-black/30 border border-white/5 rounded-xl p-3.5 flex flex-col gap-1">
-          <span class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Code</span>
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Model Output</span>
           <span id="metricCode" class="text-lg md:text-xl font-bold font-mono text-white">—</span>
         </div>
         <div class="bg-black/30 border border-white/5 rounded-xl p-3.5 flex flex-col gap-1">
@@ -201,7 +214,7 @@
           <span id="metricTokens" class="text-lg md:text-xl font-bold font-mono text-white">0</span>
         </div>
         <div class="bg-black/30 border border-white/5 rounded-xl p-3.5 flex flex-col gap-1">
-          <span class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Latency</span>
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Response Time</span>
           <span id="metricLatency" class="text-lg md:text-xl font-bold font-mono text-white">0 ms</span>
         </div>
       </div>
@@ -220,16 +233,18 @@
 
     <!-- Footer -->
     <footer class="text-center text-xs text-slate-500 flex flex-col gap-1 py-4">
-      <span>Powered by FastAPI &amp; Scikit-Learn MultinomialNB Pipeline</span>
-      <span>Spam Email Classification Project &bull; Styled with Tailwind CSS</span>
+      <span>Powered by FastAPI &amp; Scikit-Learn Logistic Regression Pipeline</span>
+      <span>Deploy-Ready ML Web Interface &bull; Styled with Tailwind CSS</span>
     </footer>
 
   </div>
 
   <script>
-    const API_URL = "http://127.0.0.1:8000/predict";
-    const HEALTH_URL = "http://127.0.0.1:8000/";
+    // Relative routes — automatically uses your Render domain or localhost
+    const API_URL = "/predict";
+    const HEALTH_URL = "/health";
 
+    // DOM Elements
     const emailInput = document.getElementById("emailInput");
     const charCount = document.getElementById("charCount");
     const wordCount = document.getElementById("wordCount");
@@ -252,7 +267,12 @@
     const errorMessage = document.getElementById("errorMessage");
     const apiDot = document.getElementById("apiDot");
     const apiStatusText = document.getElementById("apiStatusText");
+    const coldStartNotice = document.getElementById("coldStartNotice");
+    const copyBtnText = document.getElementById("copyBtnText");
 
+    let lastAnalysisResult = null;
+
+    // Common Spam Detection Triggers
     const SPAM_TRIGGERS = [
       "free", "click", "winner", "urgent", "money", "guaranteed", "prize", 
       "credit", "dollar", "$", "reward", "congratulations", "bonus", "risk-free", 
@@ -261,10 +281,10 @@
     ];
 
     const SAMPLES = {
-      spam: "Subject: URGENT: Your account access has been suspended!\n\nDear Customer, We detected irregular activity on your wallet. You must click the link below within 24 hours to verify your identity and claim your pending $5,000 compensation bonus, or your funds will be permanently locked!",
-      lottery: "Subject: Congratulations! You won $1,000,000 in International Crypto Sweepstakes!\n\nClaim your cash prize right now! No purchase necessary, guaranteed risk-free payout. Send your full banking details and password confirmation immediately to claim your award.",
-      ham: "Subject: Project Roadmap & Architecture Review for Sprint 4\n\nHi Bhumit, could you please review the attached slides before tomorrow's 10:00 AM design sync? Let me know if you want to make any adjustments to the model deployment schedule.",
-      personal: "Subject: Weekend catchup coffee?\n\nHey! Hope you are having a productive week. Are you free this Saturday around 4 PM to grab some coffee and talk through the new machine learning ideas?"
+      phishing: "Subject: URGENT: Your banking access has been suspended!\n\nDear Customer, We detected irregular activity on your account. You must click the verification link within 24 hours to verify your password and banking details, or your funds will be permanently locked!",
+      crypto: "Subject: Congratulations! You won $50,000 in International Crypto Sweepstakes!\n\nClaim your instant cash bonus right now! No purchase necessary, 100% guaranteed payout. Send your wallet confirmation and claim your award immediately.",
+      work: "Subject: Project Roadmap & Architecture Review for Sprint 4\n\nHi Bhumit, could you please review the attached slides before tomorrow's 10:00 AM design sync? Let me know if you want to make any adjustments to the model deployment schedule.",
+      casual: "Subject: Weekend catchup coffee?\n\nHey! Hope you are having a productive week. Are you free this Saturday around 4 PM to grab coffee and discuss the new machine learning features?"
     };
 
     function loadSample(type) {
@@ -281,6 +301,7 @@
       updateCounts();
       resultCard.classList.add("hidden");
       hideError();
+      lastAnalysisResult = null;
       emailInput.focus();
     }
 
@@ -291,7 +312,7 @@
         updateCounts();
         emailInput.focus();
       } catch (err) {
-        showError("Clipboard access was denied. Please paste manually using Ctrl+V.");
+        showError("Clipboard permission was denied. Please paste manually using Ctrl+V.");
       }
     }
 
@@ -325,37 +346,45 @@
       if (isLoading) {
         btnSpinner.classList.remove("hidden");
         btnIcon.classList.add("hidden");
-        btnText.textContent = "Scanning...";
+        btnText.textContent = "Classifying...";
         hideError();
       } else {
         btnSpinner.classList.add("hidden");
         btnIcon.classList.remove("hidden");
-        btnText.textContent = "Scan Email";
+        btnText.textContent = "Classify Email";
+        coldStartNotice.classList.add("hidden");
       }
     }
 
+    // Healthcheck ping
+    // Healthcheck ping
     async function checkApiHealth() {
       try {
-        const res = await fetch(HEALTH_URL, { method: "GET" });
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 4000);
+        
+        const res = await fetch(HEALTH_URL, { method: "GET", signal: controller.signal });
+        clearTimeout(timeoutId);
+
         if (res.ok) {
           apiDot.className = "w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] animate-pulse-glow";
-          apiStatusText.textContent = "API Online (Port 8000)";
+          apiStatusText.textContent = "AI Model Ready";
         } else {
           throw new Error();
         }
       } catch (e) {
         apiDot.className = "w-2 h-2 rounded-full bg-red-500 shadow-[0_0_8px_#ef4444]";
-        apiStatusText.textContent = "API Offline (Start uvicorn)";
+        apiStatusText.textContent = "API Offline";
       }
     }
 
     checkApiHealth();
-    setInterval(checkApiHealth, 10000);
+    setInterval(checkApiHealth, 15000);
 
     async function analyzeEmail() {
       const text = emailInput.value.trim();
       if (!text) {
-        showError("Please enter some email text or choose one of the sample presets above.");
+        showError("Please enter some email text or choose one of the quick samples above.");
         emailInput.focus();
         return;
       }
@@ -363,12 +392,20 @@
       setLoading(true);
       const startTime = performance.now();
 
+      // Show cold-start message if request takes more than 3.5 seconds
+      const coldStartTimer = setTimeout(() => {
+        coldStartNotice.classList.remove("hidden");
+      }, 3500);
+
       try {
         const response = await fetch(API_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: text })
         });
+
+        clearTimeout(coldStartTimer);
+        coldStartNotice.classList.add("hidden");
 
         if (!response.ok) {
           throw new Error(`Server returned HTTP ${response.status}`);
@@ -379,8 +416,10 @@
 
         renderResult(data, text, latency);
       } catch (err) {
+        clearTimeout(coldStartTimer);
+        coldStartNotice.classList.add("hidden");
         console.error(err);
-        showError(`Connection Error: Ensure FastAPI server is running at ${API_URL}. (Run: uvicorn main:app --reload)`);
+        showError(`Failed to connect to ${API_URL}. Ensure backend is running.`);
       } finally {
         setLoading(false);
       }
@@ -388,13 +427,13 @@
 
     function renderResult(data, rawText, latency) {
       const isSpam = data.is_spam === true || data.prediction === 1;
+      lastAnalysisResult = { isSpam, data, rawText, latency };
 
       if (isSpam) {
-        // Spam styling
         verdictIcon.textContent = "🚨";
-        verdictTitle.textContent = "High Risk: Spam Detected";
+        verdictTitle.textContent = "Threat Detected: Spam / Phishing";
         verdictTitle.className = "text-xl md:text-2xl font-extrabold tracking-tight text-red-400";
-        verdictDesc.textContent = "This email triggers spam/phishing patterns identified by the model.";
+        verdictDesc.textContent = "This email triggers spam and deceptive phishing patterns identified by the model.";
         
         verdictIconContainer.className = "w-14 h-14 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0 bg-red-950/40 border-red-500/40 text-red-400 shadow-[0_0_20px_rgba(239,68,68,0.2)]";
         
@@ -404,11 +443,10 @@
         metricClass.textContent = "SPAM";
         metricClass.className = "text-lg md:text-xl font-bold font-mono text-red-400";
       } else {
-        // Ham styling
         verdictIcon.textContent = "✅";
         verdictTitle.textContent = "Clean: Legitimate Email (Ham)";
         verdictTitle.className = "text-xl md:text-2xl font-extrabold tracking-tight text-emerald-400";
-        verdictDesc.textContent = "This email looks safe. No malicious or phishing markers detected.";
+        verdictDesc.textContent = "This email appears safe. No malicious or phishing triggers detected.";
         
         verdictIconContainer.className = "w-14 h-14 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0 bg-emerald-950/40 border-emerald-500/40 text-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.2)]";
         
@@ -446,6 +484,21 @@
 
       resultCard.classList.remove("hidden");
       resultCard.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    async function copyResult() {
+      if (!lastAnalysisResult) return;
+      const verdict = lastAnalysisResult.isSpam ? "SPAM" : "HAM";
+      const copyText = `[SpamGuard AI Result]\nVerdict: ${verdict}\nModel Code: ${lastAnalysisResult.data.prediction}\nLatency: ${lastAnalysisResult.latency}ms\nContent Preview: "${lastAnalysisResult.rawText.slice(0, 100)}..."`;
+      try {
+        await navigator.clipboard.writeText(copyText);
+        copyBtnText.textContent = "✓ Copied!";
+        setTimeout(() => {
+          copyBtnText.textContent = "📋 Copy";
+        }, 2000);
+      } catch (e) {
+        console.error(e);
+      }
     }
 
     updateCounts();

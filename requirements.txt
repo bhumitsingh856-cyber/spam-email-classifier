@@ -1,7 +1,9 @@
-sklearn
-numpy 
-pandas 
+scikit-learn
+numpy
+pandas
 emoji
 pydantic
 fastapi
 uvicorn
+nltk
+joblib

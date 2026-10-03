@@ -3,10 +3,10 @@ import os
 import joblib
 from fastapi import FastAPI
 from pydantic import BaseModel
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
-
-# Ensure Python finds clean_text for unpickling
 from preprocessing import clean_text
+
 sys.modules['clean_text'] = clean_text
 
 # Load the model
@@ -25,19 +25,16 @@ app.add_middleware(
 class EmailData(BaseModel):
     email: str
 
-from fastapi.responses import FileResponse
 
 @app.get("/")
-def health():
-    return {"status": "ok"}
-
-@app.get("/app")
-def serve_ui():
+def home():
     return FileResponse("index.html")
 
+@app.get("/health")
+def health():
+    return {"status": "ok"}
 @app.post("/predict")
 def predict(data: EmailData):
-    # Pass as a list [data.email]
     print(data)
     prediction = model.predict([data.email])[0]
     return {
