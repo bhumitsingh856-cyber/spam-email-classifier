@@ -2,3 +2,6 @@ sklearn
 numpy 
 pandas 
 emoji
+pydantic
+fastapi
+uvicorn
